@@ -1,0 +1,52 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+body{
+    box-sizing: border-box;
+    background-color: #839192;
+}
+header{
+    display: flex;
+    justify-content: center;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color: burlywood;
+    font-size: 30px;
+    font-weight: 500;
+    margin: 20px;
+}
+section{
+    height: 100vh;
+    width : 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.calContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: black;
+    height: 500px;
+    width: 500px;
+    justify-content: center;
+    border: 10px solid brown;
+}
+.display{
+    background-color: rgb(255, 247, 247);
+    width: 100%;
+    height: 100px;
+}
+.buttons{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 100%;
+}
+
+button{
+    flex: 1 0 25%;
+}
