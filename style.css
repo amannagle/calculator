@@ -33,7 +33,7 @@ section{
     height: 500px;
     width: 500px;
     justify-content: center;
-    border: 10px solid brown;
+    border: 10px solid black;
 }
 .display{
     background-color: rgb(255, 247, 247);
@@ -49,4 +49,6 @@ section{
 
 button{
     flex: 1 0 25%;
+    color: white;
+    background-color: black;
 }
