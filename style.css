@@ -5,7 +5,7 @@
 
 body{
     box-sizing: border-box;
-    background-color: #839192;
+    background-color: #530000;
 }
 header{
     display: flex;
@@ -36,7 +36,7 @@ section{
     border: 10px solid black;
 }
 .display{
-    background-color: rgb(255, 247, 247);
+    background-color: rgb(120, 138, 146);
     width: 100%;
     height: 100px;
 }
@@ -54,6 +54,7 @@ button{
     padding: 2px;
     background-color: indigo;
     border: 2px solid black;
+    font-family: 'Roboto', sans-serif;
 }
 
 button:hover{

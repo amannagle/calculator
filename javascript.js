@@ -40,3 +40,14 @@ function operator(num1,num2,operator)
     }
 
 }
+let calcString="";
+function onButtonClick(e)
+{
+    const display = document.querySelector('.display');
+    calcString+=e.target.textContent;
+    display.textContent=calcString;
+}
+const buttons = document.querySelectorAll('button');
+buttons.forEach((button)=>{
+    button.addEventListener('click',onButtonClick);
+})
