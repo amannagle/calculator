@@ -12,7 +12,7 @@ header{
     justify-content: center;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     color: burlywood;
-    font-size: 30px;
+    font-size: 50px;
     font-weight: 500;
     margin: 20px;
 }
@@ -51,8 +51,19 @@ button{
     flex: 1 0 25%;
     color: white;
     background-color: black;
+    padding: 2px;
+    background-color: indigo;
+    border: 2px solid black;
 }
 
 button:hover{
-    background-color: rgb(255, 30, 0);
+    background-color: rgb(105, 108, 124);
+}
+
+.operation{
+    background-color: rgb(78, 37, 190);
+}
+
+.special{
+    background-color: #da1009;
 }
