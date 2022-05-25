@@ -44,8 +44,15 @@ let calcString="";
 function onButtonClick(e)
 {
     const display = document.querySelector('.display');
+    if(e.target.textContent === 'AC' || e.target.textContent === '=' || e.target.textContent === "CLEAR")
+    return;
     calcString+=e.target.textContent;
-    display.textContent=calcString;
+    if (calcString.length > 15)
+    {
+        alert("more than 15 digits are not allowed !");
+        return;
+    }
+    display.firstChild.textContent=calcString;
 }
 const buttons = document.querySelectorAll('button');
 buttons.forEach((button)=>{
