@@ -1,3 +1,14 @@
+let calcString="";
+let num1,num2,operation;
+let lastOperatorLength=0;
+let numOperator=0;
+let result;
+let flag=0;
+let multioperatorFlag=0;
+const buttons = document.querySelectorAll('button');
+buttons.forEach((button)=>{
+    button.addEventListener('click',onButtonClick);
+})
 function add(num1,num2)
 {
     return(num1+num2);
@@ -45,19 +56,35 @@ function operator(num1,num2,operator)
     }
 
 }
-let calcString="";
-let num1,num2,operation;
-let lastOperatorLength=0;
-let numOperator=0;
-let result;
-function onButtonClick(e)
+function equals()
 {
-    const display = document.querySelector('.display');
-    
-    if(e.target.textContent === '+' || e.target.textContent === '-' || e.target.textContent === '*' || e.target.textContent === '/' || e.target.textContent === '%')
+    if(calcString.charAt(calcString.length-1) =="+" || calcString.charAt(calcString.length-1)=="-" || calcString.charAt(calcString.length-1)=="*" || calcString.charAt(calcString.length-1)=="/" || calcString.charAt(calcString.length-1)=="%")
     {
-        operation+=e.target.textContent;
-        console.log(operation);
+        return;
+    }
+    num2=Number(calcString.substring(lastOperatorLength+1,calcString.length));
+    lastOperatorLength=calcString.length;
+    if(numOperator === 1)
+    result = operator(num1,num2,operation.charAt(operation.length-1));
+    else
+    result=operator(result,num2,operation.charAt(operation.length-1));
+    calcString=result.toString();
+}
+function calculateResult(sign)
+{
+       
+        if(calcString.length === 0)
+        {
+            flag=-1;
+            calcString="";
+            return;
+        }
+        else if(calcString.charAt(calcString.length-1) =="+" || calcString.charAt(calcString.length-1)=="-" || calcString.charAt(calcString.length-1)=="*" || calcString.charAt(calcString.length-1)=="/" || calcString.charAt(calcString.length-1)=="%")
+        {
+            multioperatorFlag=-1;
+           
+        }
+        operation+=sign;
         if(numOperator >= 1)
         {
         num2=Number(calcString.substring(lastOperatorLength+1,calcString.length));
@@ -69,24 +96,29 @@ function onButtonClick(e)
         }
         else
         {
-            console.log("else is running")
             num1=Number(calcString.substring(0,calcString.length));
             lastOperatorLength=calcString.length;
         }
-        console.log(result);
         numOperator++;
+}
+function onButtonClick(e)
+{
+    const display = document.querySelector('.display');
+    
+    if(e.target.textContent === '+' || e.target.textContent === '-' || e.target.textContent === '*' || e.target.textContent === '/' || e.target.textContent === '%')
+    {
+        calculateResult(e.target.textContent);
     }
     if(e.target.textContent === '=')
     {
-        num2=Number(calcString.substring(lastOperatorLength+1,calcString.length));
-        lastOperatorLength=calcString.length;
-        result=operator(result,num2,operation.charAt(operation.length-1));
-        calcString=result;
+        equals();
     }
     if(e.target.textContent === 'AC' ||  e.target.textContent === "CLEAR")
     {
     
         calcString="";
+        flag=0;
+        multioperatorFlag=0;
     }
     
     if (calcString.length > 15)
@@ -97,13 +129,11 @@ function onButtonClick(e)
     // calcString = calcString.replace('CLEAR','');
     // calcString = calcString.replace('AC','');
     // calcString = calcString.replace('=','');
-    if(e.target.textContent != 'AC' && e.target.textContent != 'CLEAR' && e.target.textContent != '=')
+    if(e.target.textContent != 'AC' && e.target.textContent != 'CLEAR' && e.target.textContent != '=' && flag !=-1 && multioperatorFlag != -1)
     {
         calcString+=e.target.textContent;
     }
     display.firstChild.textContent=calcString;
+    flag=0;// resetting flag after each run
+    multioperatorFlag=0;
 }
-const buttons = document.querySelectorAll('button');
-buttons.forEach((button)=>{
-    button.addEventListener('click',onButtonClick);
-})
