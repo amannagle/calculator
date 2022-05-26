@@ -48,30 +48,44 @@ function operator(num1,num2,operator)
 let calcString="";
 let num1,num2,operation;
 let lastOperatorLength=0;
+let numOperator=0;
+let result;
 function onButtonClick(e)
 {
     const display = document.querySelector('.display');
     
     if(e.target.textContent === '+' || e.target.textContent === '-' || e.target.textContent === '*' || e.target.textContent === '/' || e.target.textContent === '%')
     {
-        operation=e.target.textContent;
+        operation+=e.target.textContent;
         console.log(operation);
-        num1=Number(calcString.substring(0,calcString.length));
+        if(numOperator >= 1)
+        {
+        num2=Number(calcString.substring(lastOperatorLength+1,calcString.length));
         lastOperatorLength=calcString.length;
+        if(result === undefined)
+        result=operator(num1,num2,operation.charAt(operation.length-2));
+        else
+        result=operator(result,num2,operation.charAt(operation.length-2));
+        }
+        else
+        {
+            console.log("else is running")
+            num1=Number(calcString.substring(0,calcString.length));
+            lastOperatorLength=calcString.length;
+        }
+        console.log(result);
+        numOperator++;
     }
     if(e.target.textContent === '=')
     {
         num2=Number(calcString.substring(lastOperatorLength+1,calcString.length));
-        const result = operator(num1,num2,operation);
+        lastOperatorLength=calcString.length;
+        result=operator(result,num2,operation.charAt(operation.length-1));
         calcString=result;
     }
     if(e.target.textContent === 'AC' ||  e.target.textContent === "CLEAR")
     {
-        if(e.target.textContent === "CLEAR")
-        {
-            calcString='0';
-        }
-        else
+    
         calcString="";
     }
     
@@ -85,9 +99,6 @@ function onButtonClick(e)
     // calcString = calcString.replace('=','');
     if(e.target.textContent != 'AC' && e.target.textContent != 'CLEAR' && e.target.textContent != '=')
     {
-        if(calcString === '0')
-        calcString = e.target.textContent
-        else
         calcString+=e.target.textContent;
     }
     display.firstChild.textContent=calcString;
