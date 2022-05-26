@@ -5,6 +5,7 @@ let numOperator=0;
 let result;
 let flag=0;
 let multioperatorFlag=0;
+let equalFlag=0;
 const buttons = document.querySelectorAll('button');
 buttons.forEach((button)=>{
     button.addEventListener('click',onButtonClick);
@@ -58,6 +59,12 @@ function operator(num1,num2,operator)
 }
 function equals()
 {
+    if(calcString.length==0)
+    {
+        equalFlag=-1;
+        return;
+    }
+
     if(calcString.charAt(calcString.length-1) =="+" || calcString.charAt(calcString.length-1)=="-" || calcString.charAt(calcString.length-1)=="*" || calcString.charAt(calcString.length-1)=="/" || calcString.charAt(calcString.length-1)=="%")
     {
         return;
@@ -68,6 +75,7 @@ function equals()
     result = operator(num1,num2,operation.charAt(operation.length-1));
     else
     result=operator(result,num2,operation.charAt(operation.length-1));
+    result=Math.round( result * 10000000000 + Number.EPSILON ) / 10000000000
     calcString=result.toString();
 }
 function calculateResult(sign)
@@ -129,11 +137,12 @@ function onButtonClick(e)
     // calcString = calcString.replace('CLEAR','');
     // calcString = calcString.replace('AC','');
     // calcString = calcString.replace('=','');
-    if(e.target.textContent != 'AC' && e.target.textContent != 'CLEAR' && e.target.textContent != '=' && flag !=-1 && multioperatorFlag != -1)
+    if(e.target.textContent != 'AC' && e.target.textContent != 'CLEAR' && e.target.textContent != '=' && flag !=-1 && multioperatorFlag != -1 && equalFlag != -1)
     {
         calcString+=e.target.textContent;
     }
     display.firstChild.textContent=calcString;
     flag=0;// resetting flag after each run
     multioperatorFlag=0;
+    equalFlag=0;
 }
