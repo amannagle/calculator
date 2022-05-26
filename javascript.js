@@ -1,50 +1,67 @@
 function add(num1,num2)
 {
-    console.log(num1+num2);
+    return(num1+num2);
 }
 function subtract(num1,num2)
 {
-    console.log(num1-num2);
+    return(num1-num2);
 }
 function multiply(num1,num2)
 {
-    console.log(num1*num2);  
+    return(num1*num2);  
 }
 function divide(num1,num2)
 {
-    console.log(num1/num2);
+    return(num1/num2);
 }
 function modulo(num1,num2)
 {
-    console.log(num1%num2);
+    return(num1%num2);
 }
 function operator(num1,num2,operator)
 {
     switch(operator)
     {
         case '+' :
-            add(num1,num2);
+            return add(num1,num2);
             break;
         case '-' :
-            subtract(num1,num2);
+            return subtract(num1,num2);
             break;
         case '*' :
-            multiply(num1,num2);
+            return multiply(num1,num2);
             break;
         case '/' :
-            divide(num1,num2);
+            return divide(num1,num2);
             break;
         case '%' :
-            modulo(num1,num2);
+            return modulo(num1,num2);
             break;        
     }
 
 }
 let calcString="";
+let num1,num2,operation;
+let lastOperatorLength=0;
 function onButtonClick(e)
 {
     const display = document.querySelector('.display');
-    if(e.target.textContent === 'AC' || e.target.textContent === '=' || e.target.textContent === "CLEAR")
+    
+    if(e.target.textContent === '+')
+    {
+        operation=e.target.textContent;
+        console.log(operation);
+        num1=Number(calcString.substring(0,calcString.length));
+        lastOperatorLength=calcString.length;
+    }
+    if(e.target.textContent === '=')
+    {
+        num2=Number(calcString.substring(lastOperatorLength+1,calcString.length));
+        const result = operator(num1,num2,operation);
+        calcString=result;
+        console.log(calcString);
+    }
+    if(e.target.textContent === 'AC' ||  e.target.textContent === "CLEAR")
     return;
     calcString+=e.target.textContent;
     if (calcString.length > 15)
@@ -52,7 +69,8 @@ function onButtonClick(e)
         alert("more than 15 digits are not allowed !");
         return;
     }
-    display.firstChild.textContent=calcString;
+    const newstring = calcString.replace('=','');
+    display.firstChild.textContent=newstring;
 }
 const buttons = document.querySelectorAll('button');
 buttons.forEach((button)=>{
